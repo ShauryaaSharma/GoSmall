@@ -1,0 +1,43 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --neon-green: #00ff88;
+  --neon-cyan: #00e5ff;
+  --neon-pink: #ff2d78;
+  --neon-yellow: #ffe600;
+  --bg-dark: #060810;
+  --bg-card: #0f1623;
+  --bg-card2: #111827;
+  --border-dim: rgba(0,229,255,0.12);
+  --border-mid: rgba(0,229,255,0.3);
+  --text-primary: #ddeef5;
+  --text-muted: #4a6a7a;
+  --text-dim: #2a4050;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-dark);
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 2px; }
