@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import "./App.css"
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
+const API = import.meta.env.VITE_API_BASE_URL || ""
 
 const pad = (n, d = 2) => String(n).padStart(d, "0")
 
@@ -31,7 +32,7 @@ function GoogleSignInButton({ onLogin }) {
           sub:     payload.sub,
         }
         // Persist Google user into Redis via our backend
-        const res = await fetch("/api/auth/google", {
+        const res = await fetch(`${API}/auth/google`, {
           method:  "POST",
           headers: { "Content-Type": "application/json" },
           body:    JSON.stringify(googleUser),
@@ -104,7 +105,7 @@ function AuthPage({ onLogin }) {
     if (!email || !password) { setError("ERROR: All fields are required"); return }
     setLoading(true)
     try {
-      const res  = await fetch("/api/auth/login", {
+      const res  = await fetch(`${API}/auth/login`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ email: email.trim().toLowerCase(), password }),
@@ -126,7 +127,7 @@ function AuthPage({ onLogin }) {
     if (password.length < 6)  { setError("ERROR: Password must be at least 6 characters"); return }
     setLoading(true)
     try {
-      const res  = await fetch("/api/auth/register", {
+      const res  = await fetch(`${API}/auth/register`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ username: username.trim(), email: email.trim().toLowerCase(), password }),
@@ -392,7 +393,7 @@ export default function App() {
       const body = { long_url, user_id }
       if (custom_alias) body.custom_alias = custom_alias
 
-      const res  = await fetch("/api/create-short-url", {
+      const res  = await fetch(`${API}/create-short-url`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(body),
