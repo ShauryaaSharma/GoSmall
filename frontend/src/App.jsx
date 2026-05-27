@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import "./App.css"
 
-// ─── Paste your Google OAuth Client ID here ───────────────────────────────
-const GOOGLE_CLIENT_ID = "796782940582-ci0fnl3v559mbfj50teb52cddra33c1i.apps.googleusercontent.com"
-// ─────────────────────────────────────────────────────────────────────────
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
 const pad = (n, d = 2) => String(n).padStart(d, "0")
 
